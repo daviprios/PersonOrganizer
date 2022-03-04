@@ -1,0 +1,57 @@
+@import '$styles/colors.sass'
+
+.layout
+  
+  .info
+    color: $c-neutral
+    background-color: $c-primary
+
+    .header
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+
+      width: 100%
+
+      padding: 1rem 0
+
+    .navigation
+      width: 100%
+
+      padding-bottom: 1.5rem
+
+      ul
+
+        display: flex
+        justify-content: center
+        align-items: center
+
+        list-style: none
+
+        li
+          margin: 0 0.5em
+
+          a
+            user-select: none
+
+            display: inline-block
+
+            height: 100%
+            width: 100%
+
+            padding: 0.5em 1em
+
+            background-color: $c-secondary
+            border-radius: 0.5em
+
+            text-decoration: unset
+
+            &:visited
+              color: unset
+
+            &:hover
+              background-color: $c-light-opacity
+
+            &:active
+              background-color: $c-dark-opacity
