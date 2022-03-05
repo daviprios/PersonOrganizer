@@ -6,30 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class Persons extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         if (!Schema::hasTable('persons')) {
-            Schema::create('users', function (Blueprint $table) {
+            Schema::create('persons', function (Blueprint $table) {
                 $table->id();
 
                 $table->string('name');
-                $table->date('birthday');
+                $table->timestamp('birthday');
                 
-                $table->string('phone_number')->unique();
-                $table->string('email')->unique();
-                $table->string('website')->nullable();
-
-                $table->string('address')->nullable();
+                 $table->string('phone_number')->unique()->nullable();
+                $table->string('email')->unique()->nullable();
                 $table->string('country')->nullable();
                 $table->string('city')->nullable();
-
-                $table->enum('education_level', ['pré-fundamental', 'fundamental', 'médio', 'superior', 'pós-superior']);
-                $table->string('work_at')->nullable();
 
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
@@ -37,13 +26,8 @@ class Persons extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
+        Schema::dropIfExists('persons');
     }
 }
