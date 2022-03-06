@@ -12,17 +12,16 @@ class PersonController extends Controller
 {
   private String $table = 'persons';
 
-  public function index(Request $request){
-    $data = DB::table($this->table)->select()->get()->toJson();
-    return new Response(['message' => 'Dados resgatados com sucesso', 'persons' => $data], 200);
+  public function index(){
+    $data = DB::table($this->table)->select()->get();
+    return new Response(['message' => 'Dados resgatados com sucesso', 'data' => $data], 200);
   }
 
-  public function show(Request $request){
-    $id = $request->get('id');
-    if(!$id || !is_integer($id)) return new Response(['message' => 'ID inválido'], 400);
+  public function show($id){
+    if(!$id || !is_integer(intval($id))) return new Response(['message' => 'ID inválido', 'id' => $id], 400);
 
-    $person = DB::table($this->table)->select()->where('id', '=', $id)->first()->get()->toJson();
-    if(!$person) return new Response(['message' => 'ID inválido'], 400);
+    $person = DB::table($this->table)->select()->where('id', '=', intval($id))->first();
+    if(!$person) return new Response(['message' => 'ID inválido', 'id' => $id], 400);
     return new Response(['message' => 'Dados resgatados com sucesso', 'data' => $person], 200);
   }
 
@@ -58,9 +57,8 @@ class PersonController extends Controller
     return new Response(['message' => 'Não se pode criar cadastro de pessoa'], 500);
   }
 
-  public function update(Request $request){
-    $id = $request->get('id');
-    if(!$id || !is_integer($id)) return new Response(['message' => 'ID inválido'], 400);
+  public function update(Request $request, $id){
+    if(!$id || !is_integer(intval($id))) return new Response(['message' => 'ID inválido'], 400);
 
     $this->validate($request, [
       'name' => 'string|required',
@@ -80,7 +78,7 @@ class PersonController extends Controller
       'city' => $city,
     ] = $request;
 
-    $updated = DB::table($this->table)->where('id', '=', $id)->update([
+    $updated = DB::table($this->table)->where('id', '=', intval($id))->update([
       'name' => $name,
       'birthday' => $birthday,
       'phone_number' => $phoneNumber,
@@ -93,11 +91,10 @@ class PersonController extends Controller
     return new Response(['message' => 'Não se pode atualizar cadastro de pessoa'], 500);
   }
 
-  public function delete(Request $request){
-    $id = $request->get('id');
-    if(!$id || !is_integer($id)) return new Response(['message' => 'ID inválido'], 400);
+  public function delete($id){
+    if(!$id || !is_integer(intval($id))) return new Response(['message' => 'ID inválido'], 400);
 
-    $deleted = DB::table($this->table)->where('id', '=', $id)->first()->delete();
+    $deleted = DB::table($this->table)->where('id', '=', intval($id))->delete();
 
     if($deleted > 0) return new Response(['message' => 'Dados deletados com sucesso', 'amount' => $deleted], 200);
     return new Response(['message' => 'Não se pode deletar cadastro de pessoa'], 500);

@@ -13,7 +13,7 @@ class Persons extends Migration
                 $table->id();
 
                 $table->string('name');
-                $table->timestamp('birthday');
+                $table->bigInteger('birthday');
                 
                 $table->string('phone_number')->unique()->nullable();
                 $table->string('email')->unique()->nullable();
