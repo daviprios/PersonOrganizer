@@ -16,11 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "$api": ["./src/api"],
-      "$components": ["./src/components"],
-      "$pages": ["./src/pages"],
-      "$styles": ["./src/styles"],
-      "$root": ["./src"],
+      "$api/*": ["./src/api/*"],
+      "$components/*": ["./src/components/*"],
+      "$interfaces/*": ["./src/interfaces/*"],
+      "$pages/*": ["./src/pages/*"],
+      "$styles/*": ["./src/styles/*"],
+      "$root/*": ["./src/*"],
     }
   },
   "include": ["src"],

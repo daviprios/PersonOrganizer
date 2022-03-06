@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes as Switch } from 'react-router-dom'
 
-import Layout from './components/Layout'
-import Search from './pages/Search'
+import Layout from '$components/Layout'
+import Search from '$pages/Search'
 
 const paths = {
   home: '/',
