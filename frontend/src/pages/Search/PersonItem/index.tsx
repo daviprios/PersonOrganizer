@@ -26,8 +26,8 @@ const PersonItem = (props: { personData: PersonData, remove: () => void }) => {
       <td>{day}/{month}/{year}</td>
       <td>{personData.phone_number}</td>
       <td>{personData.email}</td>
-      <td>{personData.country}</td>
-      <td>{personData.city}</td>
+      <td>{personData.country || '-'}</td>
+      <td>{personData.city || '-'}</td>
       <td>
         <button onClick={() => remove()}>Delete</button>
       </td>
