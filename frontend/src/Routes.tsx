@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes as Switch } from 'react-router-d
 
 import Layout from '$components/Layout'
 import Search from '$pages/Search'
+import Add from '$pages/Add'
 
 const paths = {
   home: '/',
@@ -18,7 +19,7 @@ const Routes = () => {
         <Route path='/' element={<Layout/>}>
           <Route index element={<Navigate to={paths.pages.search} replace/>}/>
           <Route path={paths.pages.search} element={<Search/>}/>
-          <Route path={paths.pages.add} element={<Search/>}/>
+          <Route path={paths.pages.add} element={<Add/>}/>
         </Route>
         <Route path='*'>
           <Route index element={
