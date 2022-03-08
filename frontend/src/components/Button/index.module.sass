@@ -1,0 +1,34 @@
+@use '$styles/colors'
+
+@mixin baseButton($background-color: colors.$secondary, $text-color: colors.$neutral, $border-color: colors.$neutral)
+  user-select: none
+  cursor: pointer
+
+  padding: 0.5rem 1rem
+
+  color: $text-color
+  font-weight: bold
+
+  background-color: $background-color
+
+  border: solid 1px $border-color
+  border-radius: 0.5rem
+
+  &:hover
+    background-color: colors.$light-opacity
+  
+.default 
+  @include baseButton()
+
+.info
+  @include baseButton(colors.$info)
+  
+.confirm
+  @include baseButton(colors.$confirm)
+  
+.warning
+  @include baseButton(colors.$warning)
+  
+.danger
+  @include baseButton(colors.$danger)
+  

@@ -1,8 +1,11 @@
 import { useCallback, useLayoutEffect, useState } from 'react'
+import styles from './index.module.sass'
 
 import { PersonData } from '$interfaces/PersonData'
 import PersonItem from './PersonItem'
 import PersonRequest from '$api/requests/Person'
+
+import Button from '$components/Button'
 
 const Search = () => {
   const [persons, setPersons] = useState<PersonData[]>([])
@@ -32,9 +35,9 @@ const Search = () => {
           value={''}
           onChange={() => {}}
         />
-        <button onClick={() => fetchPersons()}>
+        <Button onClick={() => fetchPersons()}>
           Recarregar
-        </button>
+        </Button>
         <table>
           <colgroup>
             <col />

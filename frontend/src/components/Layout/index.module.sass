@@ -1,10 +1,10 @@
-@import '$styles/colors.sass'
+@use '$styles/colors'
 
 .layout
   
   .info
-    color: $c-neutral
-    background-color: $c-primary
+    color: colors.$neutral
+    background-color: colors.$primary
 
     .header
       display: flex
@@ -42,7 +42,7 @@
 
             padding: 0.5em 1em
 
-            background-color: $c-secondary
+            background-color: colors.$secondary
             border-radius: 0.5em
 
             text-decoration: unset
@@ -51,7 +51,7 @@
               color: unset
 
             &:hover
-              background-color: $c-light-opacity
+              background-color: colors.$light-opacity
 
             &:active
-              background-color: $c-dark-opacity
+              background-color: colors.$dark-opacity
