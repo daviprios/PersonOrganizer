@@ -1,6 +1,5 @@
 import Connection from '$api/Connection'
-import { PersonData } from '$interfaces/PersonData'
-import { PersonRequestCreate, PersonRequestDelete, PersonRequestIndex, PersonRequestShow, PersonRequestUpdate } from '$interfaces/PersonRequestResponses'
+import { PersonRequestCreate, PersonRequestDelete, PersonRequestIndex, PersonRequestShow, PersonRequestUpdate, PersonRequestData } from '$interfaces/PersonRequestResponses'
 
 class PersonRequest {
   private static requestPath = '/person'
@@ -13,11 +12,11 @@ class PersonRequest {
     return await Connection.get<PersonRequestShow>(`${this.requestPath}/${id}`)
   }
 
-  static async create (data: PersonData) {
+  static async create (data: PersonRequestData) {
     return await Connection.post<PersonRequestCreate>(`${this.requestPath}`, data)
   }
 
-  static async update (id: number, data: PersonData) {
+  static async update (id: number, data: PersonRequestData) {
     return await Connection.put<PersonRequestUpdate>(`${this.requestPath}/${id}`, data)
   }
 

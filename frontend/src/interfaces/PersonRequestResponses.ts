@@ -30,4 +30,14 @@ interface PersonRequestDelete extends PersonRequestBase, PersonRequestErrorID{
   amount?: number
 }
 
-export type { PersonRequestIndex, PersonRequestShow, PersonRequestCreate, PersonRequestUpdate, PersonRequestDelete }
+interface PersonRequestData {
+  name: string,
+  birthday: number,
+  phone_number: string,
+  email: string,
+  country?: string,
+  city?: string,
+}
+
+
+export type { PersonRequestIndex, PersonRequestShow, PersonRequestCreate, PersonRequestUpdate, PersonRequestDelete, PersonRequestData }
