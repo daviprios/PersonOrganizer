@@ -22,7 +22,7 @@ const PersonItem = (props: { personData: PersonData, view: () => void }) => {
   return (
     <>
       <td>{personData.name}</td>
-      <td>{day}/{month}/{year}</td>
+      <td>{String(day).padStart(2, '0')}/{month}/{year}</td>
       <td><button onClick={() => view()}>Detalhes</button></td>
     </>
   )

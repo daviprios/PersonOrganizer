@@ -1,2 +1,55 @@
-.input
-  
+@use '$styles/colors'
+
+.table
+  max-width: 90%
+  width: 600px
+
+  margin: 2rem auto
+  padding: 0.5rem
+
+  border-collapse: collapse
+
+  tr
+    td, th
+      height: 2em
+      padding-left: 0.5rem
+
+  thead
+    tr
+      th
+        text-align: left
+      
+  tbody
+    tr
+      background-color: gray
+
+      &:nth-child(2n)
+        background-color: lightgray
+
+      td
+        button
+          height: 100%
+          width: 100%
+
+.personViewContainer
+  overflow: hidden
+
+  position: fixed
+  top: 0
+  left: 0
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+  height: 100vh
+  width: 100vw
+
+  background-color: colors.$dark-opacity
+
+  article
+    padding: 1rem
+
+    background-color: gray
+
+    border-radius: 0.5rem

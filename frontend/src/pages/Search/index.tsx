@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import styles from './index.module.sass'
 
 import { PersonData } from '$interfaces/PersonData'
@@ -7,19 +7,45 @@ import PersonRequest from '$api/requests/Person'
 
 import Button from '$components/Button'
 import PersonView from './PersonView'
-import { useOnClickOutside } from 'usehooks-ts'
 
 const Search = () => {
   const [persons, setPersons] = useState<PersonData[]>([
     {
-      name: 'Nome',
+      name: 'Nome1',
       birthday: Date.now(),
       email: 'email@email.com',
       id: 192837,
       phone_number: '7198765321',
       city: 'Salvador',
       country: 'Brasil'
-    }
+    },
+    {
+      name: 'Nome2',
+      birthday: Date.now(),
+      email: 'email@email.com',
+      id: 21345,
+      phone_number: '7198765321',
+      city: 'Salvador',
+      country: 'Brasil'
+    },
+    {
+      name: 'Nome3',
+      birthday: Date.now(),
+      email: 'email@email.com',
+      id: 67854,
+      phone_number: '7198765321',
+      city: 'Salvador',
+      country: 'Brasil'
+    },
+    {
+      name: 'Nome4',
+      birthday: Date.now(),
+      email: 'email@email.com',
+      id: 45173,
+      phone_number: '7198765321',
+      city: 'Salvador',
+      country: 'Brasil'
+    },
   ])
 
   const fetchPersons = useCallback(async () => {
@@ -29,7 +55,7 @@ const Search = () => {
   }, [persons])
 
   useLayoutEffect(() => {
-    //if(persons.length < 1)
+    if(persons.length < 1)
       fetchPersons()
   }, [])
 
@@ -50,9 +76,6 @@ const Search = () => {
     setShowPersonDetails(true)
   }
 
-  const personViewContainer = useRef(null)
-  useOnClickOutside(personViewContainer, () => setShowPersonDetails(false))
-
   return (
     <main>
       <article>
@@ -63,7 +86,7 @@ const Search = () => {
         <Button onClick={() => fetchPersons()}>
           Recarregar
         </Button>
-        <table>
+        <table className={styles.table}>
           <colgroup>
             <col />
             <col />
@@ -87,9 +110,9 @@ const Search = () => {
           </tbody>
         </table>
       </article>
-      <section style={{ display: showPersonDetails ? '' : 'none' }}>
-        <article ref={personViewContainer}>
-          <PersonView data={persons.find((person) => person.id === personDetailsID)}/>
+      <section className={styles.personViewContainer} style={{ display: showPersonDetails ? '' : 'none' }}>
+        <article>
+          <PersonView data={persons.find((person) => person.id === personDetailsID)} closeView={() => setShowPersonDetails(false)}/>
         </article>
       </section>
     </main>
