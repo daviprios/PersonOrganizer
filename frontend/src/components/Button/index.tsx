@@ -1,7 +1,7 @@
-import { HTMLAttributes } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 import styles from './index.module.sass'
 
-interface Button extends HTMLAttributes<HTMLButtonElement> {
+interface Button extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: 'default' | 'info' | 'confirm' | 'warning' | 'danger'
 }
 

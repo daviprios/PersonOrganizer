@@ -5,8 +5,8 @@ const getMonthName = (month: number) => [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ][month]
 
-const PersonItem = (props: { personData: PersonData, remove: () => void }) => {
-  const { personData, remove } = props
+const PersonItem = (props: { personData: PersonData, view: () => void }) => {
+  const { personData, view } = props
 
   const birthdayDate = new Date(personData.birthday)
   const [
@@ -21,16 +21,9 @@ const PersonItem = (props: { personData: PersonData, remove: () => void }) => {
 
   return (
     <>
-      <td>{personData.id}</td>
       <td>{personData.name}</td>
       <td>{day}/{month}/{year}</td>
-      <td>{personData.phone_number}</td>
-      <td>{personData.email}</td>
-      <td>{personData.country || '-'}</td>
-      <td>{personData.city || '-'}</td>
-      <td>
-        <button onClick={() => remove()}>Delete</button>
-      </td>
+      <td><button onClick={() => view()}>Detalhes</button></td>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import styles from './index.module.sass'
 
 import { PersonData } from '$interfaces/PersonData'
@@ -6,9 +6,21 @@ import PersonItem from './PersonItem'
 import PersonRequest from '$api/requests/Person'
 
 import Button from '$components/Button'
+import PersonView from './PersonView'
+import { useOnClickOutside } from 'usehooks-ts'
 
 const Search = () => {
-  const [persons, setPersons] = useState<PersonData[]>([])
+  const [persons, setPersons] = useState<PersonData[]>([
+    {
+      name: 'Nome',
+      birthday: Date.now(),
+      email: 'email@email.com',
+      id: 192837,
+      phone_number: '7198765321',
+      city: 'Salvador',
+      country: 'Brasil'
+    }
+  ])
 
   const fetchPersons = useCallback(async () => {
     const { status, data: { message, data } } = await PersonRequest.index()
@@ -17,9 +29,11 @@ const Search = () => {
   }, [persons])
 
   useLayoutEffect(() => {
-    if(persons.length < 1) fetchPersons()
+    //if(persons.length < 1)
+      fetchPersons()
   }, [])
 
+  /*
   const deletePerson = async (id: number) => {
     const { status, data: { message, amount, id: wrongID } } = await PersonRequest.delete(id)
     console.log(message)
@@ -27,6 +41,17 @@ const Search = () => {
     else console.log({ wrongID })
     setPersons(prev => prev.filter((person) => person.id !== id))
   }
+  */
+
+  const [showPersonDetails, setShowPersonDetails] = useState(false)
+  const [personDetailsID, setPersonDetailsID] = useState(0)
+  const openDetails = (id: number) => {
+    setPersonDetailsID(id)
+    setShowPersonDetails(true)
+  }
+
+  const personViewContainer = useRef(null)
+  useOnClickOutside(personViewContainer, () => setShowPersonDetails(false))
 
   return (
     <main>
@@ -43,21 +68,11 @@ const Search = () => {
             <col />
             <col />
             <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
           </colgroup>
           <thead>
             <tr>
-              <th>ID</th>
               <th>Nome</th>
               <th>Data de Nascimento</th>
-              <th>Telefone</th>
-              <th>Email</th>
-              <th>País</th>
-              <th>Cidade</th>
               <th></th>
             </tr>
           </thead>
@@ -65,13 +80,18 @@ const Search = () => {
             {persons.map((person) => {
               return (
                 <tr key={person.id}>
-                  <PersonItem personData={person} remove={() => deletePerson(person.id)}/>
+                  <PersonItem personData={person} view={() => openDetails(person.id)}/>
                 </tr>
               )
             })}
           </tbody>
         </table>
       </article>
+      <section style={{ display: showPersonDetails ? '' : 'none' }}>
+        <article ref={personViewContainer}>
+          <PersonView data={persons.find((person) => person.id === personDetailsID)}/>
+        </article>
+      </section>
     </main>
   )
 }
