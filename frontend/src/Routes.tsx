@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes as Switch } from 'react-router-d
 import Layout from '$components/Layout'
 import Search from '$pages/Search'
 import Add from '$pages/Add'
+import PersonProvider from './providers/PersonProvider'
 
 const paths = {
   home: '/',
@@ -14,6 +15,7 @@ const paths = {
 
 const Routes = () => {
   return (
+    <PersonProvider>
     <BrowserRouter>
       <Switch>
         <Route path='/' element={<Layout/>}>
@@ -28,6 +30,7 @@ const Routes = () => {
         </Route>
       </Switch>
     </BrowserRouter>
+    </PersonProvider>
   )
 }
 
