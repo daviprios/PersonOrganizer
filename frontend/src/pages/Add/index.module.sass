@@ -1,0 +1,47 @@
+@use '$styles/colors'
+
+.add
+  article
+    width: 400px
+    max-width: 90%
+
+    margin: 0 auto
+    margin-top: 3rem
+    padding: 1rem
+
+    background-color: colors.$secondary
+
+    border-radius: 1rem
+
+    form
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+
+      label
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        margin-bottom: 0.5rem
+
+        input
+          width: 50%
+
+          padding: 0.5rem
+
+          border-radius: 0.5rem
+          border: none
+
+      div
+        display: flex
+        justify-content: space-between
+
+        margin-top: 2rem
+
+        button
+          width: 40%
+
+      & > *
+        width: 100%
