@@ -7,6 +7,16 @@ import { PersonData } from '$interfaces/PersonData'
 const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
   const { data, closeView } = props
   if(!data) return <><p>Dados inválidos!</p></>
+
+    /*
+  const deletePerson = async (id: number) => {
+    const { status, data: { message, amount, id: wrongID } } = await PersonRequest.delete(id)
+    console.log(message)
+    if(status === 200 && amount) console.log({ amountDeleted: amount })
+    else console.log({ wrongID })
+    setPersons(prev => prev.filter((person) => person.id !== id))
+  }
+  */
   
   useEffect(() => {
     setName(data.name)

@@ -27,8 +27,8 @@ const personSorter = (field: keyof PersonData = 'name', order: SortOrder = 'asc'
   }
 }
 
-const PersonsTable = (props: { openDetails: (id: number) => void }) => {
-  const { openDetails } = props
+const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword: string }) => {
+  const { openDetails, filterKeyword } = props
   const { persons, setPersons } = useContext(PersonContext)
   const [fieldSorted, setFieldSorted] = useState<[keyof PersonData, SortOrder]>(['name', 'asc'])
 
@@ -107,13 +107,25 @@ const PersonsTable = (props: { openDetails: (id: number) => void }) => {
         </tr>
       </thead>
       <tbody>
-        {persons.map((person) => {
-          return (
-            <tr key={person.id}>
-              <PersonItem personData={person} view={() => openDetails(person.id)}/>
-            </tr>
-          )
-        })}
+        {
+          persons.filter((person: PersonData) => {
+            if(!filterKeyword) return true
+
+            const names = person.name.toLocaleLowerCase().split(' ')
+            for(let i = 0; i < names.length; i++){
+              if(names[i].includes(filterKeyword.toLocaleLowerCase()))
+                return true
+            }
+            return false
+          })
+          .map((person: PersonData) => {
+            return (
+              <tr key={person.id}>
+                <PersonItem personData={person} view={() => openDetails(person.id)}/>
+              </tr>
+            )
+          })
+        }
       </tbody>
       
     </table>
