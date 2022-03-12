@@ -21,7 +21,7 @@ class PersonController extends Controller
     if(!$id || !is_integer(intval($id))) return new Response(['message' => 'ID inválido', 'id' => $id], 400);
 
     $person = DB::table($this->table)->select()->where('id', '=', intval($id))->first();
-    if(!$person) return new Response(['message' => 'ID inválido', 'id' => $id], 400);
+    if(!$person) return new Response(['message' => 'Nenhuma pessoa encontrada com tal id', 'id' => $id], 204);
     return new Response(['message' => 'Dados resgatados com sucesso', 'data' => $person], 200);
   }
 

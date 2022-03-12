@@ -28,7 +28,8 @@ const Add = () => {
 
   const createPerson = async (event: FormEvent) => {
     event.preventDefault()
-    const response = await PersonRequest.create({ name, birthday, phone_number: phoneNumber, email, country, city })
+    const response = await PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
+    console.log(response)
   }
 
   const reset = (event: FormEvent) => {
@@ -51,6 +52,8 @@ const Add = () => {
               type='text'
               value={name}
               onChange={(event) => setName(event.currentTarget.value)}
+              pattern='[\w|\s]+'
+              required
             />
           </label>
           <label>
@@ -59,6 +62,7 @@ const Add = () => {
               type='date'
               value={dateNumberToString(birthday)}
               onChange={(event) => setBirthday(dateStringToNumber(event.currentTarget.value))}
+              required
             />
           </label>
           <label>
@@ -68,6 +72,7 @@ const Add = () => {
               value={phoneNumber}
               pattern='[1-9]{2}9[0-9]{8}'
               onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+              required
             />
           </label>
           <label>
@@ -76,6 +81,7 @@ const Add = () => {
               type='email'
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
+              required
             />
           </label>
           <label>
