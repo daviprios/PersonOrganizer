@@ -1,0 +1,32 @@
+@use '$styles/colors'
+
+@keyframes rotate
+  100%
+    transform: rotate(360deg)
+
+.reload
+  display: flex
+  justify-content: center
+  align-items: center
+
+  margin-top: 1rem
+
+  & > *:not(:last-child)
+    margin-right: 1rem
+
+  svg
+    display: block
+
+    height: 30px
+    aspect-ratio: 1
+
+    margin: 0
+
+    &.wrong
+      fill: colors.$danger
+
+    &.correct
+      fill: colors.$confirm
+
+    &.reload
+      animation: rotate 1s ease-in-out infinite

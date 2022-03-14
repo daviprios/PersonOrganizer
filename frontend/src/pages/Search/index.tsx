@@ -5,7 +5,7 @@ import { PersonContext } from '$root/providers/PersonProvider'
 
 import PersonView from './PersonView'
 import PersonsTable from './PersonsTable'
-import PersonSearch from './PersonSearch'
+import PersonReloader from './PersonRealoader'
 
 const Search = () => {
   const { persons } = useContext(PersonContext)
@@ -22,7 +22,13 @@ const Search = () => {
   return (
     <main className={styles.searchPage}>
       <article>
-        <PersonSearch filter={{ filterKeyword, setFilterKeyword }}/>
+        <PersonReloader/>
+        <div className={styles.search}>
+          <input placeholder='Pesquisa...'
+            value={filterKeyword}
+            onChange={(event) => setFilterKeyword(event.currentTarget.value)}
+          />
+        </div>
         <PersonsTable openDetails={openDetails} filterKeyword={filterKeyword}/>
       </article>
       {showPersonDetails
