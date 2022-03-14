@@ -25,11 +25,13 @@ const Search = () => {
         <PersonSearch filter={{ filterKeyword, setFilterKeyword }}/>
         <PersonsTable openDetails={openDetails} filterKeyword={filterKeyword}/>
       </article>
-      <section className={styles.personViewContainer} style={{ display: showPersonDetails ? '' : 'none' }}>
-        <article>
-          <PersonView data={persons.find((person) => person.id === personDetailsID)} closeView={() => setShowPersonDetails(false)}/>
-        </article>
-      </section>
+      {showPersonDetails
+      ? <section className={styles.personViewContainer}>
+          <article>
+            <PersonView data={persons.find((person) => person.id === personDetailsID)} closeView={() => setShowPersonDetails(false)}/>
+          </article>
+        </section>
+      : <></>}
     </main>
   )
 }
