@@ -1,12 +1,6 @@
 @use '$styles/colors'
 
 .popupMessage
-  position: fixed
-  bottom: 2rem
-  right: 2%
-
-  z-index: 5
-
   height: max-content
   width: 300px
   max-width: 95%
@@ -16,6 +10,9 @@
   border-radius: 1rem
 
   background-color: colors.$dark-opacity
+
+  p
+    min-height: 3em
 
   svg
     cursor: pointer

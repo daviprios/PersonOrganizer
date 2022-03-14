@@ -4,12 +4,12 @@ import IconCross from '$svgs/iconWrong.svg?component'
 
 type messageTheme = 'confirm' | 'danger' | 'warning' | 'info'
 
-const PopupMessage = (props: { message: string, theme?: messageTheme, close: () => void }) => {
-  const { message, theme } = props
+const PopupMessage = (props: { message: string, theme?: messageTheme, closeView: () => void }) => {
+  const { message, theme, closeView } = props
   
   return (
     <article className={`${styles.popupMessage} ${styles[theme || 'info']}`}>
-      <IconCross onClick={() => close()}/>
+      <IconCross onClick={() => closeView()}/>
       <p>
         {message}
       </p>
@@ -17,4 +17,5 @@ const PopupMessage = (props: { message: string, theme?: messageTheme, close: () 
   )
 }
 
+export type { messageTheme }
 export default PopupMessage

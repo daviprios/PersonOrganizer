@@ -6,7 +6,7 @@ import { PersonContext } from '$root/providers/PersonProvider'
 import PersonView from './PersonView'
 import PersonsTable from './PersonsTable'
 import PersonReloader from './PersonRealoader'
-import PopupMessage from '$components/PopupMessage'
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 const Search = () => {
   const { persons } = useContext(PersonContext)
@@ -19,6 +19,8 @@ const Search = () => {
   }
 
   const [filterKeyword, setFilterKeyword] = useState('')
+
+  const { dispatchPopupMessages } = useContext(PopupMessageContext)
 
   return (
     <main className={styles.searchPage}>
