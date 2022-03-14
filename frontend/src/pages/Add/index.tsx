@@ -1,10 +1,12 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import styles from './index.module.sass'
 
 import { dateNumberToUTCString, dateStringToNumber } from '$root/util/dateStringConverter'
 
 import PersonRequest from '$api/requests/Person'
 import Button from '$components/Button'
+
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 const Add = () => {
   const [name, setName] = useState('')
@@ -14,9 +16,20 @@ const Add = () => {
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')
 
+  const { dispatchPopupMessages } = useContext(PopupMessageContext)
+
   const createPerson = async (event: FormEvent) => {
     event.preventDefault()
-    PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
+    dispatchPopupMessages({ type: 'ADD', message: { text: 'Criando nova pessoa...', theme: 'info' } })
+    try {
+      const response = await PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
+      if(response.status === 204) dispatchPopupMessages({ type: 'ADD', message: { text: 'Nova pessoa adicionada', theme: 'confirm' } })
+      else if(response.status === 422) dispatchPopupMessages({ type: 'ADD', message: { text: 'Parece que há algum tipo de erro no formulário', theme: 'warning' } })
+      else dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível adicionar uma nova pessoa', theme: 'danger' } })
+    }
+    catch (err) {
+      dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível se conectar ao servidor', theme: 'danger' } })
+    }
   }
 
   const reset = (event: FormEvent) => {
