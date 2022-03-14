@@ -23,7 +23,7 @@ const Add = () => {
     dispatchPopupMessages({ type: 'ADD', message: { text: 'Criando nova pessoa...', theme: 'info' } })
     try {
       const response = await PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
-      if(response.status === 204) dispatchPopupMessages({ type: 'ADD', message: { text: 'Nova pessoa adicionada', theme: 'confirm' } })
+      if(response.status === 201) dispatchPopupMessages({ type: 'ADD', message: { text: 'Nova pessoa adicionada', theme: 'confirm' } })
       else if(response.status === 422) dispatchPopupMessages({ type: 'ADD', message: { text: 'Parece que há algum tipo de erro no formulário', theme: 'warning' } })
       else dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível adicionar uma nova pessoa', theme: 'danger' } })
     }

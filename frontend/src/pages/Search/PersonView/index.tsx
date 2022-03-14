@@ -1,9 +1,10 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import styles from './index.module.sass'
 
 import PersonRequest from '$api/requests/Person'
 import { dateNumberToUTCString, dateStringToNumber } from '$root/util/dateStringConverter'
 import { PersonData } from '$interfaces/PersonData'
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 import Button from '$components/Button'
 import DeletionConfirmation from '../DeletionConfirmation'
@@ -20,10 +21,21 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
   const [country, setCountry] = useState(data.country)
   const [city, setCity] = useState(data.city)
 
-  const editPerson = (event: FormEvent) => {
+  const { dispatchPopupMessages } = useContext(PopupMessageContext)
+
+  const editPerson = async (event: FormEvent) => {
     event.preventDefault()
-    PersonRequest.update(id, { name, birthday, phoneNumber, email, country, city })
     closeView()
+    try {
+      dispatchPopupMessages({ type: 'ADD', message: { text: `Atualizando os dados de ${name}...`, theme: 'info' } })
+      const response = await PersonRequest.update(id, { name, birthday, phoneNumber, email, country, city })
+      if(response.status === 200) dispatchPopupMessages({ type: 'ADD', message: { text: `Dados de ${name} atualizados`, theme: 'confirm' } })
+      else if(response.status === 422) dispatchPopupMessages({ type: 'ADD', message: { text: 'Parece que há algum tipo de erro no formulário', theme: 'warning' } })
+      else dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível atualizar os dados', theme: 'danger' } })
+    }
+    catch (err) {
+      dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível se conectar ao servidor', theme: 'danger' } })
+    }
   }
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
@@ -86,7 +98,7 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
           />
         </label>
         <div>
-          <Button type='submit' theme='confirm' onClick={(e) => editPerson(e)}>
+          <Button type='submit' theme='confirm'>
             Editar
           </Button>
           <Button type='button' theme='warning' onClick={() => setShowDeleteConfirmation(true)}>

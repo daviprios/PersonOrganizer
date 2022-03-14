@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import styles from './index.module.sass'
 
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 import PersonRequest from '$api/requests/Person'
 import Button from '$components/Button'
-import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 const DeletionConfirmation = (props: { personToDeleteID: number, name: string, closeView: () => void }) => {
   const { personToDeleteID: id, name, closeView } = props
