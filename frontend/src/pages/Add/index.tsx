@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import styles from './index.module.sass'
 
-import { dateNumberToString, dateStringToNumber } from '$root/util/dateStringConverter'
+import { dateNumberToUTCString, dateStringToNumber } from '$root/util/dateStringConverter'
 
 import PersonRequest from '$api/requests/Person'
 import Button from '$components/Button'
@@ -23,7 +23,7 @@ const Add = () => {
   const reset = (event: FormEvent) => {
     event.preventDefault()
     setName('')
-    setBirthday(Date.now())
+    setBirthday(0)
     setPhoneNumber('')
     setEmail('')
     setCountry('')
@@ -46,9 +46,9 @@ const Add = () => {
           </label>
           <label>
             Data de nascimento
-            <input placeholder='2020-05-25'
+            <input placeholder={dateNumberToUTCString(new Date(0).getTime())}
               type='date'
-              value={dateNumberToString(birthday)}
+              value={dateNumberToUTCString(birthday)}
               onChange={(event) => setBirthday(dateStringToNumber(event.currentTarget.value))}
               required
             />

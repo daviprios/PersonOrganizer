@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react'
 import styles from './index.module.sass'
 
 import PersonRequest from '$api/requests/Person'
-import { dateNumberToString, dateStringToNumber } from '$root/util/dateStringConverter'
+import { dateNumberToUTCString, dateStringToNumber } from '$root/util/dateStringConverter'
 import { PersonData } from '$interfaces/PersonData'
 
 import Button from '$components/Button'
@@ -55,9 +55,9 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
         </label>
         <label>
           Data de nascimento
-          <input placeholder={dateNumberToString(Date.now())}
+          <input placeholder={dateNumberToUTCString(Date.now())}
             type='date'
-            value={dateNumberToString(birthday)}
+            value={dateNumberToUTCString(birthday)}
             onChange={(event) => setBirthday(dateStringToNumber(event.currentTarget.value))}
           />
         </label>
