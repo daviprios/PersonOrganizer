@@ -3,6 +3,7 @@ import styles from './index.module.sass'
 
 import PersonRequest from '$api/requests/Person'
 import { PersonContext } from '$root/providers/PersonProvider'
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 import Button from '$components/Button'
 import IconReload from '../../../assets/svgs/iconReload.svg?component'
@@ -11,6 +12,7 @@ import IconWrong from '../../../assets/svgs/iconWrong.svg?component'
 
 const PersonReloader = () => {
   const { persons, setPersons } = useContext(PersonContext)
+  const { dispatchPopupMessages } = useContext(PopupMessageContext)
 
   const fetchPersons = useCallback(async () => {
     setIsLoading(true)
@@ -25,6 +27,7 @@ const PersonReloader = () => {
     catch(err){
       console.log(err)
       setHadSuccess(false)
+      dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível se conectar ao servidor', theme: 'danger' } })
     }
     setIsLoading(false)
   }, [persons])

@@ -1,14 +1,26 @@
+import { useContext } from 'react'
 import styles from './index.module.sass'
 
 import PersonRequest from '$api/requests/Person'
 import Button from '$components/Button'
+import { PopupMessageContext } from '$root/providers/PopupMessageProvider'
 
 const DeletionConfirmation = (props: { personToDeleteID: number, name: string, closeView: () => void }) => {
   const { personToDeleteID: id, name, closeView } = props
+
+  const { dispatchPopupMessages } = useContext(PopupMessageContext)
   
-  const deletePerson = () => {
-    PersonRequest.delete(id)
+  const deletePerson = async () => {
+    dispatchPopupMessages({ type: 'ADD', message: { text: `Deletando os dados de ${name}...`, theme: 'info' } })
     closeView()
+    try {
+      const response = await PersonRequest.delete(id)
+      if(response.status === 200) dispatchPopupMessages({ type: 'ADD', message: { text: `Dados de ${name} deletados`, theme: 'confirm' } })
+      else dispatchPopupMessages({ type: 'ADD', message: { text: `Não foi possível deletar os dados de ${name}`, theme: 'danger' } })
+    }
+    catch (err) {
+      dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível se conectar ao servidor', theme: 'danger' } })
+    }
   }
 
   return (
