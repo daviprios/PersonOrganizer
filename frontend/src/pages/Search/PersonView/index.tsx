@@ -1,23 +1,16 @@
 import { FormEvent, useEffect, useState } from 'react'
 import styles from './index.module.sass'
 
-import Button from '$components/Button'
+import PersonRequest from '$api/requests/Person'
+import { dateNumberToString, dateStringToNumber } from '$root/util/dateStringConverter'
 import { PersonData } from '$interfaces/PersonData'
+
+import Button from '$components/Button'
 import DeletionConfirmation from '../DeletionConfirmation'
 
 const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
   const { data, closeView } = props
   if(!data) return <><p>Dados inválidos!</p></>
-
-  /*
-  const deletePerson = async (id: number) => {
-    const { status, data: { message, amount, id: wrongID } } = await PersonRequest.delete(id)
-    console.log(message)
-    if(status === 200 && amount) console.log({ amountDeleted: amount })
-    else console.log({ wrongID })
-    setPersons(prev => prev.filter((person) => person.id !== id))
-  }
-  */
 
   useEffect(() => {
     setName(data.name)
@@ -25,9 +18,16 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
 
   const id = data.id
   const [name, setName] = useState(data.name)
+  const [birthday, setBirthday] = useState(data.birthday)
+  const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber)
+  const [email, setEmail] = useState(data.email)
+  const [country, setCountry] = useState(data.country)
+  const [city, setCity] = useState(data.city)
 
   const editPerson = (event: FormEvent) => {
     event.preventDefault()
+    PersonRequest.update(id, { name, birthday, phoneNumber, email, country, city })
+    closeView()
   }
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
@@ -53,8 +53,44 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
             onChange={(event) => setName(event.currentTarget.value)}
           />
         </label>
+        <label>
+          Data de nascimento
+          <input placeholder={dateNumberToString(Date.now())}
+            type='date'
+            value={dateNumberToString(birthday)}
+            onChange={(event) => setBirthday(dateStringToNumber(event.currentTarget.value))}
+          />
+        </label>
+        <label>
+          Número de telefone
+          <input placeholder='71912348765'
+            value={phoneNumber}
+            onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          Email
+          <input placeholder='email@email.com'
+            value={email}
+            onChange={(event) => setEmail(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          Cidade
+          <input placeholder='Salvador'
+            value={city}
+            onChange={(event) => setCity(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          País
+          <input placeholder='Brasil'
+            value={country}
+            onChange={(event) => setCountry(event.currentTarget.value)}
+          />
+        </label>
         <div>
-          <Button type='submit' theme='confirm'>
+          <Button type='submit' theme='confirm' onClick={(e) => editPerson(e)}>
             Editar
           </Button>
           <Button type='button' theme='warning' onClick={() => setShowDeleteConfirmation(true)}>

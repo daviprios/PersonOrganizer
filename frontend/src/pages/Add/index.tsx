@@ -1,22 +1,10 @@
 import { FormEvent, useState } from 'react'
 import styles from './index.module.sass'
 
+import { dateNumberToString, dateStringToNumber } from '$root/util/dateStringConverter'
+
 import PersonRequest from '$api/requests/Person'
 import Button from '$components/Button'
-
-const dateStringToNumber = (date: string) => {
-  const [year, month, day] = date.split('-')
-  const newDate = new Date(Number(year), Number(month), Number(day))
-  const timestamp = newDate.getTime()
-  return timestamp
-}
-
-const dateNumberToString = (date: number) => {
-  const dateObject = new Date(date)
-  const [year, month, day] = [ dateObject.getFullYear(), dateObject.getMonth(), dateObject.getDate() ]
-  const dateString = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-  return dateString
-}
 
 const Add = () => {
   const [name, setName] = useState('')

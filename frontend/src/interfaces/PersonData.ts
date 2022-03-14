@@ -2,7 +2,7 @@ interface PersonData {
   id: number,
   name: string,
   birthday: number,
-  phone_number: string,
+  phoneNumber: string,
   email: string,
   country?: string,
   city?: string,

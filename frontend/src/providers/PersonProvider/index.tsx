@@ -18,7 +18,7 @@ const PersonProvider = (props: { children: ReactNode }) => {
       birthday: new Date(1983, 4, 21).getTime(),
       email: 'email@email.com',
       id: 4,
-      phone_number: '7198765321',
+      phoneNumber: '7198765321',
       city: 'Salvador',
       country: 'Brasil'
     },
