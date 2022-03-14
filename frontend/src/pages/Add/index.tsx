@@ -16,8 +16,7 @@ const Add = () => {
 
   const createPerson = async (event: FormEvent) => {
     event.preventDefault()
-    const response = await PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
-    console.log(response)
+    PersonRequest.create({ name, birthday, phoneNumber, email, country, city })
   }
 
   const reset = (event: FormEvent) => {

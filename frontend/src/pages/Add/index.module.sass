@@ -32,13 +32,16 @@
           padding: 0.5rem
 
           border-radius: 0.5rem
-          border: solid 1px colors.$neutral
+          border: solid 3px colors.$neutral
 
-          &:required, &:required:valid
-            border: solid 1px colors.$neutral
+          &:required
+            border-color: colors.$neutral
 
-          &:required:invalid
-            border: solid 3px colors.$danger
+          &:valid
+           border-color: colors.$confirm 
+
+          &:invalid
+            border-color: colors.$danger
 
       div
         display: flex
