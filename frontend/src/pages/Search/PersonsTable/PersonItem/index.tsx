@@ -1,4 +1,5 @@
 import { PersonData } from '$interfaces/PersonData'
+import Button from '$components/Button'
 
 const getMonthName = (month: number) => [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -23,7 +24,7 @@ const PersonItem = (props: { personData: PersonData, view: () => void }) => {
     <>
       <td>{personData.name}</td>
       <td>{String(day).padStart(2, '0')}/{month}/{year}</td>
-      <td><button onClick={() => view()}>Detalhes</button></td>
+      <td><Button style={{ borderRadius: '0' }} theme='info' onClick={() => view()}>Detalhes</Button></td>
     </>
   )
 }

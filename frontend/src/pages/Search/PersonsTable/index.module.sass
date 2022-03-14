@@ -1,0 +1,36 @@
+.table
+  max-width: 90%
+  width: 600px
+
+  margin: 2rem auto
+  padding: 0.5rem
+
+  border-collapse: collapse
+
+  tr
+    td, th
+      height: 2em
+      padding-left: 0.5rem
+
+  thead
+    tr
+      th
+        user-select: none
+        cursor: pointer
+
+        text-align: left
+      
+  tbody
+    tr
+      background-color: gray
+
+      &:nth-child(2n)
+        background-color: lightgray
+
+      td
+        button
+          height: 100%
+          width: 100%
+
+  .caret
+    height: 50%

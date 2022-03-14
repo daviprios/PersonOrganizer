@@ -1,31 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
-import styles from '../index.module.sass'
+import styles from './index.module.sass'
 
 import { PersonContext } from '$root/providers/PersonProvider'
 import { PersonData } from '$interfaces/PersonData'
-import PersonItem from '../PersonItem'
+import PersonItem from './PersonItem'
+import personSorter, { SortOrder } from '$root/util/personSorter'
 
-type SortOrder = 'asc' | 'desc'
-
-const personSorter = (field: keyof PersonData = 'name', order: SortOrder = 'asc') => {
-  return (a: PersonData, b: PersonData) => {
-    const fieldA = a[field]
-    const fieldB = b[field]
-
-    const result = order === 'asc' ? 1 : -1
-    if(fieldA === undefined || fieldB === undefined) return result
-
-    if (typeof fieldA === 'number'){
-      return (fieldA - Number(fieldB)) * result
-    }
-    if (typeof fieldA === 'string'){
-      return result > 0
-        ? fieldA.localeCompare(String(fieldB))
-        : String(fieldB).localeCompare(fieldA)
-    }
-    return 0
-  }
-}
+import IconCaretDown from '$svgs/iconCaretDown.svg?component'
+import IconCaretUp from '$svgs/iconCaretUp.svg?component'
 
 const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword: string }) => {
   const { openDetails, filterKeyword } = props
@@ -98,10 +80,10 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
       <thead>
         <tr>
           <th onClick={() => sortPersons('name')}>
-            Nome {fieldSorted[0] === 'name' ? fieldSorted[1] === 'asc' ? 'V' : '^' : '' }
+            Nome {fieldSorted[0] === 'name' ? fieldSorted[1] === 'asc' ? <IconCaretDown className={styles.caret}/> : <IconCaretUp className={styles.caret}/> : '' }
           </th>
           <th onClick={() => sortPersons('birthday')}>
-            Data de Nascimento {fieldSorted[0] === 'birthday' ? fieldSorted[1] === 'asc' ? 'V' : '^' : '' }
+            Data de Nascimento {fieldSorted[0] === 'birthday' ? fieldSorted[1] === 'asc' ? <IconCaretDown className={styles.caret}/> : <IconCaretUp className={styles.caret}/> : '' }
           </th>
           <th></th>
         </tr>
@@ -127,7 +109,6 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
           })
         }
       </tbody>
-      
     </table>
   )
 }
