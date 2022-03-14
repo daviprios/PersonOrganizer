@@ -55,10 +55,6 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
     ])
   }, [])
 
-  useEffect(() => {
-    console.log(persons)
-  }, [persons])
-
   const sortPersons = (field?: keyof PersonData, order?: SortOrder) => {
     const personsToSort = persons
 

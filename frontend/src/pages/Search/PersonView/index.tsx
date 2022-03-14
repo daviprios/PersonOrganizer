@@ -12,10 +12,6 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
   const { data, closeView } = props
   if(!data) return <><p>Dados inválidos!</p></>
 
-  useEffect(() => {
-    setName(data.name)
-  }, [data])
-
   const id = data.id
   const [name, setName] = useState(data.name)
   const [birthday, setBirthday] = useState(data.birthday)
