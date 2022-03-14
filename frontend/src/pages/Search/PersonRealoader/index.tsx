@@ -11,10 +11,10 @@ import IconCorrect from '../../../assets/svgs/iconCorrect.svg?component'
 import IconWrong from '../../../assets/svgs/iconWrong.svg?component'
 
 const PersonReloader = () => {
-  const { persons, setPersons } = useContext(PersonContext)
+  const { setPersons } = useContext(PersonContext)
   const { dispatchPopupMessages } = useContext(PopupMessageContext)
 
-  const fetchPersons = useCallback(async () => {
+  const fetchPersons = async () => {
     setIsLoading(true)
     try {
       const { status, data: { data } } = await PersonRequest.index()
@@ -30,7 +30,7 @@ const PersonReloader = () => {
       dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível se conectar ao servidor', theme: 'danger' } })
     }
     setIsLoading(false)
-  }, [persons])
+  }
 
   const [isLoading, setIsLoading] = useState(false)
   const [hadSuccess, setHadSuccess] = useState(true)

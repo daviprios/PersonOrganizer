@@ -16,7 +16,7 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
   const id = data.id
   const [name, setName] = useState(data.name)
   const [birthday, setBirthday] = useState(data.birthday)
-  const [phoneNumber, setPhoneNumber] = useState(data.phoneNumber)
+  const [phone_number, setPhone_number] = useState(data.phone_number)
   const [email, setEmail] = useState(data.email)
   const [country, setCountry] = useState(data.country)
   const [city, setCity] = useState(data.city)
@@ -28,7 +28,7 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
     closeView()
     try {
       dispatchPopupMessages({ type: 'ADD', message: { text: `Atualizando os dados de ${name}...`, theme: 'info' } })
-      const response = await PersonRequest.update(id, { name, birthday, phoneNumber, email, country, city })
+      const response = await PersonRequest.update(id, { name, birthday, phone_number, email, country, city })
       if(response.status === 200) dispatchPopupMessages({ type: 'ADD', message: { text: `Dados de ${name} atualizados`, theme: 'confirm' } })
       else if(response.status === 422) dispatchPopupMessages({ type: 'ADD', message: { text: 'Parece que há algum tipo de erro no formulário', theme: 'warning' } })
       else dispatchPopupMessages({ type: 'ADD', message: { text: 'Não foi possível atualizar os dados', theme: 'danger' } })
@@ -72,8 +72,8 @@ const PersonView = (props: { data?: PersonData, closeView: () => void }) => {
         <label>
           Número de telefone
           <input placeholder='71912348765'
-            value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+            value={phone_number}
+            onChange={(event) => setPhone_number(event.currentTarget.value)}
           />
         </label>
         <label>

@@ -33,7 +33,7 @@ interface PersonRequestDelete extends PersonRequestBase, PersonRequestErrorID{
 interface PersonRequestData {
   name: string,
   birthday: number,
-  phoneNumber: string,
+  phone_number: string,
   email: string,
   country?: string,
   city?: string,

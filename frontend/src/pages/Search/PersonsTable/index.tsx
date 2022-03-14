@@ -21,7 +21,7 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
         birthday: new Date(1983, 4, 21).getTime(),
         email: 'email@email.com',
         id: 4,
-        phoneNumber: '7198765321',
+        phone_number: '7198765321',
         city: 'Salvador',
         country: 'Brasil'
       },
@@ -30,7 +30,7 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
         birthday: new Date(1973, 8, 2).getTime(),
         email: 'email@email.com',
         id: 3,
-        phoneNumber: '7198765321',
+        phone_number: '7198765321',
         city: 'Salvador',
         country: 'Brasil'
       },
@@ -39,7 +39,7 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
         birthday: new Date(1999, 1, 28).getTime(),
         email: 'email@email.com',
         id: 1,
-        phoneNumber: '7198765321',
+        phone_number: '7198765321',
         city: 'Salvador',
         country: 'Brasil'
       },
@@ -48,7 +48,7 @@ const PersonsTable = (props: { openDetails: (id: number) => void, filterKeyword:
         birthday: new Date(1960, 12, 25).getTime(),
         email: 'email@email.com',
         id: 2,
-        phoneNumber: '7198765321',
+        phone_number: '7198765321',
         city: 'Salvador',
         country: 'Brasil'
       },
