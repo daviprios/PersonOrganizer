@@ -29,7 +29,7 @@ class PersonController extends Controller
     $this->validate($request, [
       'name' => 'string|required',
       'birthday' => 'integer|required',
-      'phoneNumber' => 'string|required',
+      'phone_number' => 'string|required',
       'email' => 'email|required',
       'country' => 'string',
       'city' => 'string',
@@ -38,7 +38,7 @@ class PersonController extends Controller
     [
       'name' => $name,
       'birthday' => $birthday,
-      'phoneNumber' => $phoneNumber,
+      'phone_number' => $phone_number,
       'email' => $email,
       'country' => $country,
       'city' => $city,
@@ -47,7 +47,7 @@ class PersonController extends Controller
     $created = DB::table($this->table)->insert([
       'name' => $name,
       'birthday' => $birthday,
-      'phone_number' => $phoneNumber,
+      'phone_number' => $phone_number,
       'email' => $email,
       'country' => $country,
       'city' => $city,
@@ -63,7 +63,7 @@ class PersonController extends Controller
     $this->validate($request, [
       'name' => 'string|required',
       'birthday' => 'integer|required',
-      'phoneNumber' => 'string|required',
+      'phone_number' => 'string|required',
       'email' => 'email|required',
       'country' => 'string',
       'city' => 'string',
@@ -72,7 +72,7 @@ class PersonController extends Controller
     [
       'name' => $name,
       'birthday' => $birthday,
-      'phoneNumber' => $phoneNumber,
+      'phone_number' => $phone_number,
       'email' => $email,
       'country' => $country,
       'city' => $city,
@@ -81,7 +81,7 @@ class PersonController extends Controller
     $updated = DB::table($this->table)->where('id', '=', intval($id))->update([
       'name' => $name,
       'birthday' => $birthday,
-      'phone_number' => $phoneNumber,
+      'phone_number' => $phone_number,
       'email' => $email,
       'country' => $country,
       'city' => $city,
