@@ -1,0 +1,40 @@
+@use '$styles/colors'
+
+.popupMessage
+  position: fixed
+  bottom: 2rem
+  right: 2%
+
+  z-index: 5
+
+  height: max-content
+  width: 300px
+  max-width: 95%
+
+  padding: 1rem
+
+  border-radius: 1rem
+
+  background-color: colors.$dark-opacity
+
+  svg
+    cursor: pointer
+    float: right
+
+    height: 2rem
+
+    padding: 0.25rem 0.5rem
+
+    fill: darkred
+
+  &.info
+    background-color: colors.$info
+
+  &.danger
+    background-color: colors.$danger
+
+  &.confirm
+    background-color: colors.$confirm
+
+  &.warning
+    background-color: colors.$warning

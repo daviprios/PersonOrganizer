@@ -2,6 +2,7 @@ import styles from './index.module.sass'
 
 import { Link, Outlet } from 'react-router-dom'
 import { paths } from '../../Routes'
+import PopupMessage from '$components/PopupMessage'
 
 const Layout = () => {
   return (
@@ -23,6 +24,7 @@ const Layout = () => {
         </nav>
       </div>
       <Outlet/>
+      <PopupMessage message='Teste de mensagem de erro ou outro qualquer.' theme='warning' close={() => {}}/>
     </div>
   )
 }

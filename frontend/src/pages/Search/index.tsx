@@ -6,6 +6,7 @@ import { PersonContext } from '$root/providers/PersonProvider'
 import PersonView from './PersonView'
 import PersonsTable from './PersonsTable'
 import PersonReloader from './PersonRealoader'
+import PopupMessage from '$components/PopupMessage'
 
 const Search = () => {
   const { persons } = useContext(PersonContext)
